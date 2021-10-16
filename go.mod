@@ -1,4 +1,4 @@
-module awesomeProject2
+module communication
 
 go 1.14
 
