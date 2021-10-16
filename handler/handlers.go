@@ -7,7 +7,7 @@ import (
 
 var handlers = []*Handler{
 	{
-		"data",
+		"test",
 		func(args ...string) {
 			if len(args) == 0 {
 				fmt.Println("Yes, i am listening. i will confirm what you say :)")
