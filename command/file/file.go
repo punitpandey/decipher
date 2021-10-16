@@ -85,8 +85,7 @@ func (f file) Run() {
 	}
 }
 
-func NewClient(handleProvider handler.HandleProvider, params ...string) (command.Handler, error) {
-	var err error
+func NewClient(handleProvider handler.HandleProvider, configs ...string) (command.Handler, error) {
 	defer func() {
 		if r := recover(); r != nil {
 			if fileInstance.readLocation != nil {
@@ -100,23 +99,22 @@ func NewClient(handleProvider handler.HandleProvider, params ...string) (command
 	}()
 	once.Do(func() {
 		fileInstance.handler = handleProvider
-		if len(params) > 0 {
-			fileInstance.readLocation, _ = os.OpenFile(params[0], os.O_RDONLY, 777)
+		if len(configs) > 0 {
+			fileInstance.readLocation, err = os.OpenFile(configs[0], os.O_RDONLY, 777)
 			if err != nil {
 				log.Fatal(err)
 			}
-			fileInstance.writeLocation, _ = os.Create(path.Join(path.Dir(params[0]), strings.TrimSuffix(path.Base(params[0]), path.Ext(params[0]))+"_output"+path.Ext(params[0])))
+			fileInstance.writeLocation, err = os.Create(path.Join(path.Dir(configs[0]), strings.TrimSuffix(path.Base(configs[0]), path.Ext(configs[0]))+"_output"+path.Ext(configs[0])))
 			if err != nil {
 				log.Fatal(err)
 			}
 			fileInstance.readWriter = bufio.NewReadWriter(bufio.NewReader(fileInstance.readLocation), bufio.NewWriter(fileInstance.writeLocation))
 		}
-		if len(params) > 1 {
-			fileInstance.delim = params[1]
+		del := "\n"
+		if len(configs) > 1 {
+			del = configs[1]
 		}
+		fileInstance.delim = del
 	})
-	if err != nil {
-		return nil, errors.New(FileError)
-	}
 	return fileInstance, nil
 }
