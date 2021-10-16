@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"awesomeProject2/command"
-	"awesomeProject2/command/cli"
-	"awesomeProject2/handler"
+	"communication/command"
+	"communication/command/cli"
+	"communication/handler"
 )
 
 func main() {

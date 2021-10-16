@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"awesomeProject2/command"
-	"awesomeProject2/handler"
+	"communication/command"
+	"communication/handler"
 )
 
 const (

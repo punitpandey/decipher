@@ -2,7 +2,6 @@ package file
 
 import (
 	"bufio"
-	"errors"
 	"io"
 	"log"
 	"os"
@@ -11,14 +10,13 @@ import (
 	"strings"
 	"sync"
 
-	"awesomeProject2/command"
-	"awesomeProject2/handler"
+	"communication/command"
+	"communication/handler"
 )
 
 const (
-	FileError = "error in opening file"
-	ExitFlag  = "exit"
-	ReadFlag  = "done"
+	ExitFlag = "exit"
+	ReadFlag = "done"
 )
 
 var (
@@ -98,6 +96,7 @@ func NewClient(handleProvider handler.HandleProvider, configs ...string) (comman
 		}
 	}()
 	once.Do(func() {
+		var err error
 		fileInstance.handler = handleProvider
 		if len(configs) > 0 {
 			fileInstance.readLocation, err = os.OpenFile(configs[0], os.O_RDONLY, 777)
