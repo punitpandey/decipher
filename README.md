@@ -1,4 +1,5 @@
 # communication
+  Scratch setup with file/cli communication capability.
 
 ### structure
   * handler: have implementation in handler.go and handlers in handlers.go
