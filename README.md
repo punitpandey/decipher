@@ -1,4 +1,4 @@
-# communication
+# decipher
   Scratch repo setup with file/cli communication capability.
 
 ### structure
