@@ -1,4 +1,4 @@
-module communication
+module decipher
 
 go 1.14
 
